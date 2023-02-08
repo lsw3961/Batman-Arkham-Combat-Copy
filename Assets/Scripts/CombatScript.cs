@@ -42,6 +42,7 @@ public class CombatScript : MonoBehaviour
 
     int animationCount = 0;
     string[] attacks;
+    bool swordDrawn = false;
 
     void Start()
     {
@@ -84,15 +85,36 @@ public class CombatScript : MonoBehaviour
         Attack(lockedTarget, TargetDistance(lockedTarget));
     }
 
+    /// <summary>
+    /// draws the sword according to a parameter
+    /// </summary>
+    /// <param name="DrawSword"></param>
+    public void DrawSword() 
+    {
+        if (swordDrawn) 
+        {
+            return;
+        }
+        swordDrawn = true;
+        animator.SetTrigger("DrawSword");
+    }
+
     public void Attack(EnemyScript target, float distance)
     {
         //Types of attack animation
-        attacks = new string[] { "AirKick", "AirKick2", "AirPunch", "AirKick3", "SwordSlash1" };
+        attacks = new string[] { "AirKick", "AirKick2", "AirPunch", "AirKick3", "SwordSlash1", "SwordSlash2" };
 
+        //if sword is sheathed unsheath it
+        if (!swordDrawn)
+        {
+            DrawSword();
+            return;
+        }
         //Attack nothing in case target is null
         if (target == null)
         {
-            AttackType("GroundPunch", .2f, null, 0);
+
+            AttackType("SwordSlash1", .2f, null, 0);
             return;
         }
 
