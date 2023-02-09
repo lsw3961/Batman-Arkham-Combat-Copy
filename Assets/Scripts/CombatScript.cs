@@ -88,7 +88,6 @@ public class CombatScript : MonoBehaviour
     /// <summary>
     /// draws the sword according to a parameter
     /// </summary>
-    /// <param name="DrawSword"></param>
     public void DrawSword() 
     {
         if (swordDrawn) 
@@ -97,6 +96,18 @@ public class CombatScript : MonoBehaviour
         }
         swordDrawn = true;
         animator.SetTrigger("DrawSword");
+    }
+
+    /// <summary>
+    /// Sheath the sword 
+    /// </summary>
+    public void SheathSword()
+    {
+        if (swordDrawn)
+        {
+            swordDrawn = false;
+            animator.SetTrigger("SheathSword");
+        }
     }
 
     public void Attack(EnemyScript target, float distance)
