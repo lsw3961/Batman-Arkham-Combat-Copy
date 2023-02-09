@@ -126,6 +126,7 @@ public class CombatScript : MonoBehaviour
         {
 
             AttackType("SwordSlash1", .2f, null, 0);
+            SheathSword();
             return;
         }
 
